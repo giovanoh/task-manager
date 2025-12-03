@@ -1,20 +1,20 @@
 # Task Manager
 
-Um aplicativo web moderno de gerenciamento de tarefas desenvolvido com React, TypeScript e Tailwind CSS.
+Aplicativo web de gerenciamento de tarefas desenvolvido com React, TypeScript e Tailwind CSS.
 
 ## 🚀 Funcionalidades
 
-- ✅ **CRUD completo de tarefas** - Criar, visualizar, editar e excluir tarefas
-- ✅ **Sistema de status** - Pendente, Em Progresso, Concluída, Cancelada
-- ✅ **Prioridades** - Baixa, Média, Alta, Urgente
-- ✅ **Datas de vencimento** - Controle de prazos com alertas de vencimento
-- ✅ **Sistema de tags** - Organização por etiquetas personalizáveis
-- ✅ **Busca e filtros** - Encontre tarefas rapidamente por diversos critérios
-- ✅ **Ordenação** - Organize tarefas por data, prioridade, título, etc.
-- ✅ **Dashboard** - Visão geral com estatísticas e tarefas recentes
-- ✅ **Persistência local** - Dados salvos no navegador (LocalStorage)
-- ✅ **Interface responsiva** - Funciona perfeitamente em desktop, tablet e mobile
-- ✅ **SPA (Single Page Application)** - Navegação fluida sem recarregar a página
+- **CRUD completo de tarefas** - Criar, visualizar, editar e excluir tarefas
+- **Sistema de status** - Pendente, Em Progresso, Concluída, Cancelada
+- **Prioridades** - Baixa, Média, Alta, Urgente
+- **Datas de vencimento** - Controle de prazos com alertas de vencimento
+- **Sistema de tags** - Organização por etiquetas personalizáveis
+- **Busca e filtros** - Encontre tarefas rapidamente por diversos critérios
+- **Ordenação** - Organize tarefas por data, prioridade, título, etc.
+- **Dashboard** - Visão geral com estatísticas e tarefas recentes
+- **Persistência local** - Dados salvos no navegador (LocalStorage)
+- **Interface responsiva** - Funciona perfeitamente em desktop, tablet e mobile
+- **SPA (Single Page Application)** - Navegação fluida sem recarregar a página
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -26,6 +26,7 @@ Um aplicativo web moderno de gerenciamento de tarefas desenvolvido com React, Ty
 - **date-fns** - Biblioteca para manipulação de datas
 - **UUID** - Geração de identificadores únicos
 - **clsx** - Utilitário para manipulação de classes CSS
+- **Cypress** - Framework de testes end-to-end e de componentes
 
 ## 📁 Estrutura do Projeto
 
@@ -110,6 +111,53 @@ src/
 - **Alta**: Laranja
 - **Urgente**: Vermelho
 
+## 🧪 Testes
+
+O projeto utiliza **Cypress** para testes end-to-end (E2E) e testes de componentes.
+
+### Executando os Testes
+
+#### Testes E2E (End-to-End)
+```bash
+# Abrir interface interativa do Cypress
+npm run cypress:open
+
+# Executar testes E2E em modo headless
+npm run test:e2e
+# ou
+npm run cypress:run:e2e
+```
+
+#### Testes de Componentes
+```bash
+# Executar testes de componentes em modo headless
+npm run test:component
+# ou
+npm run cypress:run:component
+```
+
+#### Executar Todos os Testes
+```bash
+# Executa todos os testes (E2E + Componentes)
+npm run cypress:run
+```
+
+### Estrutura de Testes
+
+```
+cypress/
+├── e2e/              # Testes end-to-end
+├── component/        # Testes de componentes
+├── fixtures/         # Dados de teste
+├── support/          # Comandos e configurações customizadas
+└── tsconfig.json     # Configuração TypeScript para Cypress
+```
+
+### Tipos de Testes
+
+- **Testes E2E**: Testam o fluxo completo da aplicação, desde a navegação até as interações do usuário
+- **Testes de Componentes**: Testam componentes isolados, verificando renderização, props e interações
+
 ## 🔧 Desenvolvimento
 
 ### Scripts Disponíveis
@@ -118,6 +166,10 @@ src/
 - `npm run build` - Gera build de produção
 - `npm run preview` - Visualiza o build de produção
 - `npm run lint` - Executa o linter
+- `npm run cypress:open` - Abre a interface do Cypress
+- `npm run cypress:run` - Executa todos os testes em modo headless
+- `npm run test:e2e` - Executa apenas testes E2E
+- `npm run test:component` - Executa apenas testes de componentes
 
 ### Estrutura de Dados
 

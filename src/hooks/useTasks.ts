@@ -20,7 +20,7 @@ type StoredTask = Omit<Task, 'createdAt' | 'updatedAt' | 'dueDate'> & {
 
 const defaultTasks: Task[] = [
   {
-    id: '1',
+    id: uuidv4(),
     title: 'Configurar projeto React',
     description: 'Configurar projeto React com TypeScript e dependências necessárias',
     status: 'completed',
@@ -30,7 +30,7 @@ const defaultTasks: Task[] = [
     tags: ['setup', 'react']
   },
   {
-    id: '2',
+    id: uuidv4(),
     title: 'Implementar sistema de tarefas',
     description: 'Criar funcionalidade completa de CRUD para tarefas',
     status: 'in-progress',
@@ -41,7 +41,7 @@ const defaultTasks: Task[] = [
     tags: ['development', 'crud']
   },
   {
-    id: '3',
+    id: uuidv4(),
     title: 'Adicionar filtros e busca',
     description: 'Implementar sistema de filtros e busca de tarefas',
     status: 'pending',

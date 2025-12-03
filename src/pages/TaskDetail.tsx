@@ -16,7 +16,7 @@ export function TaskDetail() {
 
   if (!task) {
     return (
-      <div className="text-center py-12">
+      <div data-cy="task-detail-not-found" className="text-center py-12">
         <svg
           className="mx-auto h-12 w-12 text-gray-400"
           fill="none"
@@ -77,7 +77,7 @@ export function TaskDetail() {
   const isOverdue = task.dueDate && task.dueDate < new Date() && task.status !== 'completed' && task.status !== 'cancelled';
 
   return (
-    <div className="space-y-6">
+    <div data-cy="task-detail" className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
@@ -111,9 +111,9 @@ export function TaskDetail() {
         <div className="space-y-6">
           {/* Title and Status */}
           <div className="flex justify-between items-start">
-            <h2 className="text-2xl font-bold text-gray-900">{task.title}</h2>
+            <h2 data-cy="task-detail-title" className="text-2xl font-bold text-gray-900">{task.title}</h2>
             <div className="flex items-center space-x-3">
-              <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+              <span data-cy="task-detail-status" className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                 task.status === 'completed' ? 'bg-green-100 text-green-800' :
                 task.status === 'in-progress' ? 'bg-blue-100 text-blue-800' :
                 task.status === 'cancelled' ? 'bg-red-100 text-red-800' :
@@ -125,7 +125,7 @@ export function TaskDetail() {
               </span>
 
               {isOverdue && (
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                <span data-cy="task-detail-overdue" className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
                   Vencida
                 </span>
               )}
@@ -135,7 +135,7 @@ export function TaskDetail() {
           {/* Priority */}
           <div>
             <span className="text-sm font-medium text-gray-500">Prioridade: </span>
-            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${
+            <span data-cy="task-detail-priority" className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${
               task.priority === 'urgent' ? 'bg-red-100 text-red-800' :
               task.priority === 'high' ? 'bg-orange-100 text-orange-800' :
               task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
@@ -150,14 +150,14 @@ export function TaskDetail() {
           {/* Description */}
           <div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">Descrição</h3>
-            <p className="text-gray-600 whitespace-pre-wrap">{task.description}</p>
+            <p data-cy="task-detail-description" className="text-gray-600 whitespace-pre-wrap">{task.description}</p>
           </div>
 
           {/* Due Date */}
           {task.dueDate && (
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-2">Data de Vencimento</h3>
-              <p className={`text-gray-600 ${isOverdue ? 'text-red-600 font-medium' : ''}`}>
+              <p data-cy="task-detail-due-date" className={`text-gray-600 ${isOverdue ? 'text-red-600 font-medium' : ''}`}>
                 {format(task.dueDate, 'dd/MM/yyyy', { locale: ptBR })}
                 {isOverdue && ' (Vencida)'}
               </p>
@@ -168,10 +168,11 @@ export function TaskDetail() {
           {task.tags && task.tags.length > 0 && (
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-2">Tags</h3>
-              <div className="flex flex-wrap gap-2">
+              <div data-cy="task-detail-tags" className="flex flex-wrap gap-2">
                 {task.tags.map((tag, index) => (
                   <span
                     key={index}
+                    data-cy="task-detail-tag"
                     className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
                   >
                     {tag}
@@ -205,6 +206,7 @@ export function TaskDetail() {
               <div className="flex flex-wrap gap-3">
                 {task.status === 'pending' && (
                   <Button
+                    data-cy="task-detail-start-button"
                     variant="primary"
                     onClick={() => handleStatusChange(task.id, 'in-progress')}
                     disabled={isUpdating}
@@ -215,6 +217,7 @@ export function TaskDetail() {
 
                 {task.status === 'in-progress' && (
                   <Button
+                    data-cy="task-detail-complete-button"
                     variant="primary"
                     onClick={() => handleStatusChange(task.id, 'completed')}
                     disabled={isUpdating}
@@ -224,6 +227,7 @@ export function TaskDetail() {
                 )}
 
                 <Button
+                  data-cy="task-detail-cancel-button"
                   variant="danger"
                   onClick={() => handleStatusChange(task.id, 'cancelled')}
                   disabled={isUpdating}

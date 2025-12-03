@@ -10,12 +10,12 @@ export function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Dashboard', href: '/', current: location.pathname === '/' },
-    { name: 'Todas as Tarefas', href: '/tasks', current: location.pathname === '/tasks' },
+    { name: 'Dashboard', dataCy: 'nav-dashboard', href: '/', current: location.pathname === '/' },
+    { name: 'Todas as Tarefas', dataCy: 'nav-all-tasks', href: '/tasks', current: location.pathname === '/tasks' },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div data-cy="layout" className="min-h-screen bg-gray-100">
       {/* Header */}
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,6 +31,7 @@ export function Layout({ children }: LayoutProps) {
             <nav className="hidden md:flex space-x-8">
               {navigation.map((item) => (
                 <Link
+                  data-cy={item.dataCy}
                   key={item.name}
                   to={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
@@ -46,7 +47,7 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Actions */}
             <div className="flex items-center space-x-4">
-              <Link to="/tasks/new">
+              <Link to="/tasks/new" data-cy="nav-new-task">
                 <Button variant="primary" size="sm">
                   Nova Tarefa
                 </Button>
@@ -59,6 +60,7 @@ export function Layout({ children }: LayoutProps) {
             <nav className="flex space-x-4 pb-4">
               {navigation.map((item) => (
                 <Link
+                  //data-cy={item.dataCy}
                   key={item.name}
                   to={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${

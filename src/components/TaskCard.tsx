@@ -39,7 +39,7 @@ export function TaskCard({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
+    <div data-cy="task-card" className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
       {/* Header com título e prioridade */}
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 flex-1 mr-3">
@@ -108,6 +108,7 @@ export function TaskCard({
       <div className="flex flex-wrap gap-2">
         {onViewDetails && (
           <Button
+            data-cy="task-view-details-button"
             variant="outline"
             size="sm"
             onClick={() => onViewDetails(task)}
@@ -118,6 +119,7 @@ export function TaskCard({
 
         {onEdit && (
           <Button
+            data-cy="task-edit-button"
             variant="secondary"
             size="sm"
             onClick={() => onEdit(task)}
@@ -129,6 +131,7 @@ export function TaskCard({
         {/* Botões de mudança de status */}
         {task.status === 'pending' && (
           <Button
+            data-cy="task-start-button"
             variant="primary"
             size="sm"
             onClick={() => handleStatusChange('in-progress')}
@@ -139,6 +142,7 @@ export function TaskCard({
 
         {task.status === 'in-progress' && (
           <Button
+            data-cy="task-complete-button"
             variant="primary"
             size="sm"
             onClick={() => handleStatusChange('completed')}
@@ -149,6 +153,7 @@ export function TaskCard({
 
         {onDelete && task.status !== 'completed' && (
           <Button
+            data-cy="task-delete-button"
             variant="danger"
             size="sm"
             onClick={() => onDelete(task.id)}

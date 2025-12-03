@@ -125,7 +125,7 @@ export function TaskList() {
   };
 
   return (
-    <div className="space-y-6">
+    <div data-cy="task-list" className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
@@ -145,12 +145,14 @@ export function TaskList() {
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <Input
+            data-cy="task-filter-search-input"
             placeholder="Buscar tarefas..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
           <Select
+            data-cy="task-filter-status-select"
             placeholder="Filtrar por status"
             options={statusOptions}
             value={currentStatus}
@@ -158,6 +160,7 @@ export function TaskList() {
           />
 
           <Select
+            data-cy="task-filter-priority-select"
             placeholder="Filtrar por prioridade"
             options={priorityOptions}
             value={currentPriority}
@@ -166,6 +169,7 @@ export function TaskList() {
 
           <div className="flex items-end">
             <Button
+              data-cy="task-filter-clear-filters-button"
               variant="outline"
               onClick={clearFilters}
               className="w-full"

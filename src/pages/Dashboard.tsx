@@ -18,30 +18,35 @@ export function Dashboard() {
   const statsCards = [
     {
       name: 'Total de Tarefas',
+      key: 'total',
       value: stats.total,
       color: 'bg-blue-500',
       href: '/tasks'
     },
     {
       name: 'Pendentes',
+      key: 'pending',
       value: stats.pending,
       color: 'bg-yellow-500',
       href: '/tasks?status=pending'
     },
     {
       name: 'Em Progresso',
+      key: 'in-progress',
       value: stats.inProgress,
       color: 'bg-blue-500',
       href: '/tasks?status=in-progress'
     },
     {
       name: 'Concluídas',
+      key: 'completed',
       value: stats.completed,
       color: 'bg-green-500',
       href: '/tasks?status=completed'
     },
     {
       name: 'Vencidas',
+      key: 'overdue',
       value: stats.overdue,
       color: 'bg-red-500',
       href: '/tasks?overdue=true'
@@ -59,7 +64,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="space-y-8">
+    <div data-cy="dashboard" className="space-y-8">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
@@ -68,7 +73,7 @@ export function Dashboard() {
             Visão geral das suas tarefas e produtividade
           </p>
         </div>
-        <Link to="/tasks/new">
+        <Link to="/tasks/new" data-cy="dashboard-new-task">
           <Button variant="primary">
             Nova Tarefa
           </Button>
@@ -88,7 +93,7 @@ export function Dashboard() {
                 <div className={`w-4 h-4 rounded-full ${stat.color} mr-3`}></div>
                 <div>
                   <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  <p data-cy={`dashboard-${stat.key}-count`} className="text-2xl font-bold text-gray-900">{stat.value}</p>
                 </div>
               </div>
             </div>
@@ -111,6 +116,7 @@ export function Dashboard() {
             <div className="space-y-3">
               {recentTasks.map((task) => (
                 <Link
+                  data-cy="dashboard-recent-task"
                   key={task.id}
                   to={`/tasks/${task.id}`}
                   className="block p-3 rounded-md border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
@@ -156,6 +162,7 @@ export function Dashboard() {
             <div className="space-y-3">
               {upcomingTasks.map((task) => (
                 <Link
+                  data-cy="dashboard-upcoming-task"
                   key={task.id}
                   to={`/tasks/${task.id}`}
                   className="block p-3 rounded-md border border-gray-200 hover:bg-gray-50 transition-colors duration-200"

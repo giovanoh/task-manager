@@ -104,6 +104,7 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
+docs/
 
 # Cypress
 cypress/screenshots/

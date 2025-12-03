@@ -67,9 +67,12 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
     }
 
     if (formData.dueDate) {
-      const selectedDate = new Date(formData.dueDate);
+      // Converter data do formato ISO (YYYY-MM-DD) para Date no timezone local
+      const [year, month, day] = formData.dueDate.split('-').map(Number);
+      const selectedDate = new Date(year, month - 1, day);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      selectedDate.setHours(0, 0, 0, 0);
 
       if (selectedDate < today) {
         newErrors.dueDate = 'Data de vencimento não pode ser no passado';
@@ -92,11 +95,17 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
       .map(tag => tag.trim())
       .filter(tag => tag.length > 0);
 
+    // Converter data do formato ISO (YYYY-MM-DD) para Date no timezone local
+    const parseDateLocal = (dateString: string): Date => {
+      const [year, month, day] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    };
+
     const submitData = {
       title: formData.title.trim(),
       description: formData.description.trim(),
       priority: formData.priority,
-      dueDate: formData.dueDate ? new Date(formData.dueDate) : undefined,
+      dueDate: formData.dueDate ? parseDateLocal(formData.dueDate) : undefined,
       tags: tags.length > 0 ? tags : undefined
     };
 
@@ -116,7 +125,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div data-cy="task-form" className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">
         {task ? 'Editar Tarefa' : 'Nova Tarefa'}
       </h2>
@@ -124,6 +133,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Título */}
         <Input
+          data-cy="task-title"
           label="Título"
           value={formData.title}
           onChange={handleInputChange('title')}
@@ -134,6 +144,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
 
         {/* Descrição */}
         <Textarea
+          data-cy="task-description"
           label="Descrição"
           value={formData.description}
           onChange={handleInputChange('description')}
@@ -145,6 +156,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
 
         {/* Prioridade */}
         <Select
+          data-cy="task-priority"
           label="Prioridade"
           value={formData.priority}
           onChange={handleInputChange('priority')}
@@ -154,6 +166,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
 
         {/* Data de vencimento */}
         <Input
+          data-cy="task-due-date"
           label="Data de Vencimento"
           type="date"
           value={formData.dueDate}
@@ -164,6 +177,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
 
         {/* Tags */}
         <Input
+          data-cy="task-tags"
           label="Tags"
           value={formData.tags}
           onChange={handleInputChange('tags')}
@@ -175,6 +189,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
         {/* Botões de ação */}
         <div className="flex justify-end space-x-3 pt-4">
           <Button
+            data-cy="task-cancel-button"
             type="button"
             variant="outline"
             onClick={onCancel}
@@ -183,6 +198,7 @@ export function TaskForm({ task, onSubmit, onCancel, isLoading = false }: TaskFo
             Cancelar
           </Button>
           <Button
+            data-cy="task-submit-button"
             type="submit"
             variant="primary"
             disabled={isLoading}
